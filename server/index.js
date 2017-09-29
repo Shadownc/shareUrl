@@ -1,7 +1,5 @@
 import express from 'express'
-import {Nuxt, Builder} from 'nuxt'
-
-var opn = require('opn')//node 自动打开浏览器
+import { Nuxt, Builder } from 'nuxt'
 
 import api from './api'
 
@@ -23,8 +21,8 @@ const nuxt = new Nuxt(config)
 
 // Build only in dev mode
 if (config.dev) {
-    const builder = new Builder(nuxt)
-    builder.build()
+  const builder = new Builder(nuxt)
+  builder.build()
 }
 
 // Give nuxt middleware to express
@@ -33,6 +31,3 @@ app.use(nuxt.render)
 // Listen the server
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
-
-/*var uri = 'http://localhost:' + port
- opn(uri)*/

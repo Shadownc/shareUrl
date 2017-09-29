@@ -1,45 +1,45 @@
-const webpack = require('webpack')
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+// const webpack = require('webpack')
+// const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 module.exports = {
-    /*
-     ** Headers of the page
-     */
-    head: {
-        title: 'starter',
-        meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: 'Nuxt.js project'}
-        ],
-        link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-        ]
-    },
-    /*
-     ** Global CSS
-     */
-    css: ['~/assets/css/main.css'],
+  /*
+   ** Headers of the page
+   */
+  head: {
+    title: 'starter',
+    meta: [
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'Nuxt.js project'}
+    ],
+    link: [
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+    ]
+  },
+  /*
+   ** Global CSS
+   */
+  css: ['~/assets/css/main.css'],
 
+  /*
+   ** Add axios globally
+   */
+  build: {
+    vendor: ['axios'],
+    plugins: [
+      // new OpenBrowserPlugin({url: 'http://localhost:3000'})
+    ],
     /*
-     ** Add axios globally
+     ** Run ESLINT on save
      */
-    build: {
-        vendor: ['axios'],
-        plugins: [
-            //new OpenBrowserPlugin({url: 'http://localhost:3000'})
-        ],
-        /*
-         ** Run ESLINT on save
-         */
-        extend (config, ctx) {
-            /* if (ctx.isClient) {
-             config.module.rules.push({
-             enforce: 'pre',
-             test: /\.(js|vue)$/,
-             loader: 'eslint-loader',
-             exclude: /(node_modules)/
-             })
-             }*/
-        }
+    extend (config, ctx) {
+      if (ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     }
+  }
 }
