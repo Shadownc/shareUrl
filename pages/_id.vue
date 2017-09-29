@@ -29,7 +29,7 @@ export default {
   },
   head () {
     return {
-      title: `User: ${this.user.name}`
+      title: `User: ${this.user.username}`
     }
   }
 }
