@@ -6,12 +6,12 @@ const URL = require('url');
 // Mock Users
 const User = require('../model/users');
 
+let response;
+
 /* GET users listing. */
 router.get('/users', function (req, res, next) {
     var params = URL.parse(req.url, true).query;
-    var response;
     if (params.name) {
-        console.log(params.name)
         User.find({username: params.name}, (err, user) => {
             response = {status: 1, data: user};
             res.send(JSON.stringify(response));
@@ -24,9 +24,13 @@ router.get('/users', function (req, res, next) {
 
 /* GET user by ID. */
 router.get('/users/:id', function (req, res, next) {
-    const id = parseInt(req.params.id)
-    if (id >= 0 && id < users.length) {
-        res.json(users[id])
+    const id = req.params.id
+    if (id) {
+        //res.json(users[id])
+        User.findOne({username: id}, (err, user) => {
+            response = {status: 1, data: user};
+            res.json(response);
+        });
     } else {
         res.sendStatus(404)
     }

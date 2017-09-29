@@ -26,7 +26,7 @@ module.exports = {
     build: {
         vendor: ['axios'],
         plugins: [
-            new OpenBrowserPlugin({url: 'http://localhost:3000'})
+            //new OpenBrowserPlugin({url: 'http://localhost:3000'})
         ],
         /*
          ** Run ESLINT on save
