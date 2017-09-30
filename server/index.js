@@ -1,7 +1,8 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
-
 import api from './api'
+
+const mongoose = require('mongoose')
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -28,6 +29,16 @@ if (config.dev) {
 // Give nuxt middleware to express
 app.use(nuxt.render)
 
-// Listen the server
-app.listen(port, host)
-console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+// 连接数据库后再监听端口
+
+mongoose.connect('mongodb://localhost/vue_test', {
+  useMongoClient: true
+})
+
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'connection error:'))
+  .once('open', function () {
+    app.listen(port, host)
+    console.log('Server listening on ' + host + ':' + port)
+  })
