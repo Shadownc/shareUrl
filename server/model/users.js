@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
   password: { // 密码
     type: String,
     required: true
+  },
+  createTime: { // 创建时间
+    type: Date,
+    default: Date.now()
   }
 })
 
