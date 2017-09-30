@@ -1,6 +1,9 @@
 // const webpack = require('webpack')
 // const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 module.exports = {
+  render: {
+    resourceHints: false
+  },
   /*
    ** Headers of the page
    */
