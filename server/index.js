@@ -14,6 +14,25 @@ const port = process.env.PORT || 3000
 
 app.set('port', port)
 
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({extended: true})) // for parsing application/x-www-form-urlencoded
+/* cookie解析 */
+app.use(cookieParser())
+/* 配置session插件 */
+app.use(session({
+  secret: '123456',
+  name: 'sessionId', // cookie中的键名，用于存储sessionId
+  cookie: {maxAge: 2 * 60 * 1000}, // cookie保存的时间
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    host: 'localhost',
+    port: 27017,
+    db: 'session',
+    url: 'mongodb://localhost:27017/vue_test'
+  })
+}))
+
 // Import API Routes
 require('./router.js')(app, express.Router()) // 所有api请求
 app.use('/api', api)
