@@ -2,6 +2,10 @@ import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 import api from './api'
 
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const mongoose = require('mongoose')
 
 const app = express()
@@ -11,6 +15,7 @@ const port = process.env.PORT || 3000
 app.set('port', port)
 
 // Import API Routes
+require('./router.js')(app, express.Router()) // 所有api请求
 app.use('/api', api)
 
 // Import and Set Nuxt.js options
